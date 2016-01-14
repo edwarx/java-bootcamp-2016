@@ -1,0 +1,15 @@
+package proxy;
+
+public class ConnectionProxy implements DatabaseConnection {
+
+	private MySqlConnection conn;
+	
+	@Override
+	public String getConnection() {
+		if(conn == null) {
+			conn = new MySqlConnection();
+		}
+		return conn.getConnection();
+	}
+
+}
