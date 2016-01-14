@@ -1,0 +1,13 @@
+package databaseConnections;
+
+public class MsSqlServerConnection implements DatabaseConnection {
+	private DatabaseConnection conn;
+	
+	@Override
+	public DatabaseConnection getConnection() {
+		if (conn == null) {
+			conn = new MsSqlServerConnection();
+		}
+		return conn;
+	}
+}

@@ -1,0 +1,14 @@
+package databaseConnections;
+
+public class MySqlConnection implements DatabaseConnection {
+	private DatabaseConnection conn;
+
+	@Override
+	public DatabaseConnection getConnection() {
+		if (conn == null) {
+			conn = new MySqlConnection();
+		}
+		return conn;
+	}
+	
+}

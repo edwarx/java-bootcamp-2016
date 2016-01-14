@@ -1,0 +1,16 @@
+package databaseConnections;
+
+import abstractFactory.DatabaseConnection;
+
+public class OracleConnection implements DatabaseConnection {
+	private DatabaseConnection conn;
+	
+	@Override
+	public DatabaseConnection getConnection() {
+		if (conn == null) {
+			conn = new OracleConnection();
+		}
+		return conn;
+	}
+
+}

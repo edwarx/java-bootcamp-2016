@@ -1,0 +1,7 @@
+package abstractFactory;
+
+import abstractFactory.DatabaseConnections.DatabaseConnection;
+
+public abstract class AbstractFactory {
+	abstract DatabaseConnection getDatabaseConnection();
+}

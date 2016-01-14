@@ -1,0 +1,14 @@
+package abstractFactory.databaseConnections;
+
+public class MySqlConnection implements DatabaseConnection {
+	DatabaseConnection conn;
+
+	@Override
+	public DatabaseConnection getConnection() {
+		if (conn == null) {
+			conn = new MySqlConnection();
+		}
+		return conn;
+	}
+	
+}
