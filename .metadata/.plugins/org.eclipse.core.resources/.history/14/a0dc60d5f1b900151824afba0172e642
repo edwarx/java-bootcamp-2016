@@ -1,8 +1,0 @@
-package databaseConnections;
-
-public interface DatabaseConnection {
-	public DatabaseConnection getInstance();
-	
-	public DatabaseConnection getConnection();
-
-}

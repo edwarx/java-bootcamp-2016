@@ -1,6 +1,0 @@
-package abstractFactory.databaseConnections;
-
-public interface DatabaseConnection {
-
-	public DatabaseConnection getConnection();
-}
