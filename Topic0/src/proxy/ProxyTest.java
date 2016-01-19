@@ -8,7 +8,7 @@ public class ProxyTest {
 
 	@Test
 	public void test() {
-		DatabaseConnection conn = new ProxyConnection();
+		ProxyConnection conn = new ProxyConnection();
 		assertEquals(conn.getConnection(), "Connected to a MySQL Database");
 	}
 

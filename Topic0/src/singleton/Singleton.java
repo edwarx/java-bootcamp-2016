@@ -1,4 +1,4 @@
-package abstractFactory;
+package singleton;
 
 import java.sql.Array;
 import java.sql.Blob;
@@ -19,16 +19,19 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.Executor;
 
-public class MySqlConnection implements Connection {
+/**
+ * Singleton class.
+ */
+public class Singleton implements Connection {
 
 	private static Connection instance;
 
-	private MySqlConnection() {
+	private Singleton() {
 	}
 
 	public static Connection getInstance() {
 		if (instance == null) {
-			instance = new MySqlConnection();
+			instance = new Singleton();
 		}
 		return instance;
 	}
@@ -358,5 +361,4 @@ public class MySqlConnection implements Connection {
 		// TODO Auto-generated method stub
 
 	}
-
 }

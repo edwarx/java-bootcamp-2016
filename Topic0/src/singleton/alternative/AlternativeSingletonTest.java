@@ -1,25 +1,21 @@
-package singleton;
+package singleton.alternative;
 
 import static org.junit.Assert.*;
-
-import java.util.logging.Logger;
+import java.sql.Connection;
 
 import org.junit.Test;
 
-public class AlternativeDatabaseConnectionTest {
+public class AlternativeSingletonTest {
 
 	@Test
 	public void test() {
-		assertNotNull(AlternativeDatabaseConnection.INSTANCE);
+		assertNotNull(AlternativeSingleton.INSTANCE);
 	}
 
 	@Test
 	public void testGetConnection() {
-		AlternativeDatabaseConnection conn = AlternativeDatabaseConnection.INSTANCE;
-		Logger l = Logger.getLogger(AlternativeDatabaseConnection.class.getName());
+		Connection conn = AlternativeSingleton.INSTANCE;
 		assertNotNull(conn);
-		assertEquals("Connected to the database", conn.getConnection(""));
-		l.info(conn.getConnection(""));
 	}
 
 }

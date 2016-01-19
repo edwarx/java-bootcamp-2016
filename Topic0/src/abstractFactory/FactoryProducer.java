@@ -1,10 +1,26 @@
 package abstractFactory;
 
-public class FactoryProducer {
-	public static AbstractFactory getFactory(String choice) {
+import java.sql.Connection;
 
-		if (choice.equalsIgnoreCase("Connection")) {
-			return new ConnectionFactory();
+public class FactoryProducer {
+	private AbstractDBConnectionFactory factory;
+
+	public Connection getConnection(String choice) {
+
+		if (choice == null) {
+			return null;
+		}
+		if (choice.compareTo("MySQL") == 0) {
+			factory = new MySqlConnectionFactory();
+			return factory.getConnection();
+		}
+		if (choice.compareTo("MS SQL Server") == 0) {
+			factory = new SqlServerConnectionFactory();
+			return factory.getConnection();
+		}
+		if (choice.compareTo("Oracle") == 0) {
+			factory = new OracleConnectionFactory();
+			return factory.getConnection();
 		}
 
 		return null;

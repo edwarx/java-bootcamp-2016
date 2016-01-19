@@ -2,24 +2,22 @@ package abstractFactory;
 
 import static org.junit.Assert.*;
 
+import java.sql.Connection;
+
 import org.junit.Test;
 
 public class AbstractFactoryTest {
 
 	@Test
 	public void test() {
-		AbstractFactory connectionFactory = FactoryProducer.getFactory("Connection");
-		assertNotNull(connectionFactory);
+		FactoryProducer factory = new FactoryProducer();
 
-		DatabaseConnection conn = connectionFactory.getDatabaseConnection("MySQL");
+		Connection conn = factory.getConnection("MySQL");
 		assertEquals(conn.getClass().getSimpleName(), "MySqlConnection");
-		assertEquals(conn.getConnection(), "Connected to a MySQL Database");
-		conn = connectionFactory.getDatabaseConnection("MS SQL Server");
-		assertEquals(conn.getClass().getSimpleName(), "MsSqlServerConnection");
-		assertEquals(conn.getConnection(), "Connected to a Microsoft SQL Server Database");
-		conn = connectionFactory.getDatabaseConnection("Oracle");
+		conn = factory.getConnection("MS SQL Server");
+		assertEquals(conn.getClass().getSimpleName(), "SqlServerConnection");
+		conn = factory.getConnection("Oracle");
 		assertEquals(conn.getClass().getSimpleName(), "OracleConnection");
-		assertEquals(conn.getConnection(), "Connected to an Oracle Database");
 	}
 
 }

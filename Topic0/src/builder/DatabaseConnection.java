@@ -1,4 +1,4 @@
-package abstractFactory;
+package builder;
 
 import java.sql.Array;
 import java.sql.Blob;
@@ -19,16 +19,20 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.Executor;
 
-public class MySqlConnection implements Connection {
+public class DatabaseConnection implements Connection {
+	private String databaseType;
+	private String url;
+	private String username;
+	private String password;
+	private static DatabaseConnection instance;
 
-	private static Connection instance;
+	private DatabaseConnection() {
 
-	private MySqlConnection() {
 	}
 
 	public static Connection getInstance() {
 		if (instance == null) {
-			instance = new MySqlConnection();
+			instance = new DatabaseConnection();
 		}
 		return instance;
 	}
@@ -357,6 +361,38 @@ public class MySqlConnection implements Connection {
 	public void setTypeMap(Map<String, Class<?>> map) throws SQLException {
 		// TODO Auto-generated method stub
 
+	}
+
+	public String getDatabaseType() {
+		return databaseType;
+	}
+
+	public void setDatabaseType(String databaseType) {
+		this.databaseType = databaseType;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 }

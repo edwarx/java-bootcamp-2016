@@ -1,5 +1,7 @@
 package abstractFactory;
 
-public abstract class AbstractFactory {
-	abstract DatabaseConnection getDatabaseConnection(String dbConn);
+import java.sql.Connection;
+
+public interface AbstractDBConnectionFactory {
+	public Connection getConnection();
 }
