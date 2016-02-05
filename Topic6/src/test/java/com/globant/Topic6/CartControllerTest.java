@@ -2,8 +2,6 @@ package com.globant.Topic6;
 
 import static org.junit.Assert.*;
 
-import java.util.Iterator;
-
 import org.junit.Before;
 import org.junit.After;
 import org.junit.Test;
@@ -24,7 +22,6 @@ import com.globant.Topic6.entity.Product;
 import com.globant.Topic6.entity.Purchase;
 import com.globant.Topic6.entity.User;
 import com.globant.Topic6.service.CartService;
-import com.globant.Topic6.service.SiteService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = App.class)

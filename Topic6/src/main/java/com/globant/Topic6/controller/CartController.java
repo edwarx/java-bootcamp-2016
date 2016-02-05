@@ -15,9 +15,12 @@ import com.globant.Topic6.service.CartService;
 import com.globant.Topic6.service.ProductService;
 import com.globant.Topic6.service.UserService;
 
+import io.swagger.annotations.Api;
+
 @RestController
 @RequestMapping("/cart")
 @ComponentScan("com.globant.Topic6.service")
+@Api(value = "Cart", description = "All operations related to a cart")
 public class CartController {
 	@Autowired
 	private CartService cartService;
@@ -69,7 +72,7 @@ public class CartController {
 		cartService.updateQuantity(productService.findById(productId), quantity, cart);
 	}
 
-	@RequestMapping(value = "/cart/checkout", method = RequestMethod.GET)
+	@RequestMapping(value = "/checkout", method = RequestMethod.GET)
 	public Purchase checkout(@RequestBody Cart cart) {
 		return cartService.checkout(cart);
 	}

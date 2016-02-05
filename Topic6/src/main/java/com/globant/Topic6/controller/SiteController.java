@@ -12,8 +12,11 @@ import com.globant.Topic6.entity.User;
 import com.globant.Topic6.service.SiteService;
 import com.globant.Topic6.service.UserService;
 
+import io.swagger.annotations.Api;
+
 @RestController
 @ComponentScan("com.globant.Topic6.service")
+@Api(value = "Site", description = "Login and logout operations")
 public class SiteController {
 	@Autowired
 	SiteService siteService;

@@ -15,9 +15,12 @@ import com.globant.Topic6.entity.Product;
 import com.globant.Topic6.service.CategoryService;
 import com.globant.Topic6.service.ProductService;
 
+import io.swagger.annotations.Api;
+
 @RestController
 @RequestMapping("/product")
 @ComponentScan("com.globant.Topic6.service")
+@Api(value = "Product", description = "All operations related to products")
 public class ProductController {
 	@Autowired
 	private ProductService productService;

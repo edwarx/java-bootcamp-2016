@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.globant.Topic6.entity.Category;
 import com.globant.Topic6.service.CategoryService;
 
+import io.swagger.annotations.Api;
+
 @RestController
 @RequestMapping("/category")
 @ComponentScan("com.globant.Topic6.service")
+@Api(value = "Category", description = "All operations related to product's categories")
 public class CategoryController {
 
 	@Autowired
