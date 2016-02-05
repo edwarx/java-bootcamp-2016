@@ -14,8 +14,11 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
+
 public class App {
+
 	public static void main(String[] args) {
+		Site site = Site.getInstance();
 		SpringApplication.run(App.class, args);
 	}
 }

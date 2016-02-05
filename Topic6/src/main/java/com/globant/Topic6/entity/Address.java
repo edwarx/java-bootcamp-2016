@@ -6,6 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "address")
@@ -14,8 +15,9 @@ public class Address {
 	@Id
 	@GeneratedValue
 	private int id;
-	@ManyToOne 
+	@ManyToOne
 	@JoinColumn(name = "user")
+	@JsonBackReference
 	private User user;
 	private String street;
 	private String city;
@@ -59,6 +61,14 @@ public class Address {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public boolean equals(Address address) {
+
+		if (this.id == (address.getId())) {
+			return true;
+		}
+		return false;
 	}
 
 }

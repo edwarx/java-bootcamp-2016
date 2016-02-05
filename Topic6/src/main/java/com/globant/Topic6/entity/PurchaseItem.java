@@ -2,28 +2,29 @@ package com.globant.Topic6.entity;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
-@Table(name = "cart_item")
-public class CartItem {
-
+@Table(name = "purchase_item")
+public class PurchaseItem {
 	@Id
 	@GeneratedValue
 	private int id;
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "product")
 	private Product product;
 	private int quantity;
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "cart")
+	@JoinColumn(name = "purchase")
 	@JsonBackReference
-	private Cart cart;
+	private Purchase purchase;
 
 	public Product getProduct() {
 		return product;
@@ -41,26 +42,16 @@ public class CartItem {
 		this.quantity = quantity;
 	}
 
+	public Purchase getPurchase() {
+		return purchase;
+	}
+
+	public void setPurchase(Purchase purchase) {
+		this.purchase = purchase;
+	}
+
 	public int getId() {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public Cart getCart() {
-		return cart;
-	}
-
-	public void setCart(Cart cart) {
-		this.cart = cart;
-	}
-
-	public boolean equals(CartItem cartItem) {
-		if (this.id == cartItem.getId()) {
-			return true;
-		}
-		return false;
-	}
 }

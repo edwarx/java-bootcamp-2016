@@ -1,8 +1,10 @@
 package com.globant.Topic6.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -14,7 +16,8 @@ public class Product {
 	@GeneratedValue
 	private int id;
 	private String name;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "category")
 	private Category category;
 	private String description;
 	private double price;

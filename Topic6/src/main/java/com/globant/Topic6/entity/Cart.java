@@ -2,12 +2,16 @@ package com.globant.Topic6.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.globant.Topic6.entity.CartItem;
 
 @Entity
@@ -16,10 +20,12 @@ public class Cart {
 	@Id
 	@GeneratedValue
 	private int id;
-	@ManyToOne
+	@OneToOne
+	@JoinColumn(name = "user")
 	private User user;
-	@OneToMany
-	private List<CartItem> items;
+	@OneToMany(mappedBy = "cart", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JsonManagedReference
+	private List<CartItem> cartItem;
 	private double total;
 
 	public User getUser() {
@@ -28,14 +34,6 @@ public class Cart {
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-	public List<CartItem> getItems() {
-		return items;
-	}
-
-	public void setItems(List<CartItem> items) {
-		this.items = items;
 	}
 
 	public double getTotal() {
@@ -52,6 +50,14 @@ public class Cart {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public List<CartItem> getCartItem() {
+		return cartItem;
+	}
+
+	public void setCartItem(List<CartItem> cartItem) {
+		this.cartItem = cartItem;
 	}
 
 }

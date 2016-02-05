@@ -8,9 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
-
 import io.swagger.annotations.ApiModelProperty;
 
 @Entity
@@ -24,7 +24,8 @@ public class User {
 	private String username;
 	@JsonProperty(access = Access.WRITE_ONLY)
 	private String password;
-	@OneToMany (mappedBy = "user", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	@JsonManagedReference
 	private List<Address> address;
 
 	@JsonProperty(required = true)
@@ -56,6 +57,7 @@ public class User {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+
 	public String getPassword() {
 		return password;
 	}
@@ -74,8 +76,8 @@ public class User {
 		this.address = address;
 	}
 
-	public boolean equals(User u) {
-		if (this.username.compareTo(u.getUsername()) == 0) {
+	public boolean equals(User user) {
+		if (this.username.compareTo(user.getUsername()) == 0) {
 			return true;
 		}
 		return false;
