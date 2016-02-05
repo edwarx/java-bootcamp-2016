@@ -2,11 +2,13 @@ package com.globant.Topic6.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.globant.Topic6.entity.Cart;
 import com.globant.Topic6.entity.CartItem;
 import com.globant.Topic6.entity.Product;
@@ -18,6 +20,7 @@ import com.globant.Topic6.service.UserService;
 import io.swagger.annotations.Api;
 
 @RestController
+@Configuration
 @RequestMapping("/cart")
 @ComponentScan("com.globant.Topic6.service")
 @Api(value = "Cart", description = "All operations related to a cart")

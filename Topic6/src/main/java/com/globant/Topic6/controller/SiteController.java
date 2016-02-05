@@ -2,6 +2,7 @@ package com.globant.Topic6.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,6 +16,7 @@ import com.globant.Topic6.service.UserService;
 import io.swagger.annotations.Api;
 
 @RestController
+@Component
 @ComponentScan("com.globant.Topic6.service")
 @Api(value = "Site", description = "Login and logout operations")
 public class SiteController {

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.MediaType;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 
 @RestController
+@Component
 @RequestMapping("/user")
 @ComponentScan("com.globant.Topic6.service")
 @Api(value = "User", description = "All operations related to users")
@@ -29,6 +31,7 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+
 	@ApiOperation(value = "List of all users")
 	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<User> listAllUsers() {

@@ -1,6 +1,7 @@
 package com.globant.Topic6;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -12,7 +13,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 import com.globant.Topic6.controller.UserController;
 import com.globant.Topic6.entity.Address;
@@ -20,6 +23,7 @@ import com.globant.Topic6.entity.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = App.class)
+@ContextConfiguration(loader=AnnotationConfigContextLoader.class)
 public class UserControllerTest {
 
 	@Autowired
