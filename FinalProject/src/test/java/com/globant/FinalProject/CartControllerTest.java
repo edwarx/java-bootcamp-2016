@@ -1,4 +1,4 @@
-package com.globant.Topic6;
+package com.globant.FinalProject;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -12,26 +12,30 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.globant.Topic6.controller.CartController;
-import com.globant.Topic6.controller.CategoryController;
-import com.globant.Topic6.controller.ProductController;
-import com.globant.Topic6.controller.SiteController;
-import com.globant.Topic6.controller.UserController;
-import com.globant.Topic6.entity.Cart;
-import com.globant.Topic6.entity.CartItem;
-import com.globant.Topic6.entity.Category;
-import com.globant.Topic6.entity.Product;
-import com.globant.Topic6.entity.Purchase;
-import com.globant.Topic6.entity.User;
-import com.globant.Topic6.service.CartService;
+import com.globant.FinalProject.App;
+import com.globant.FinalProject.Site;
+import com.globant.FinalProject.controller.CartController;
+import com.globant.FinalProject.controller.CategoryController;
+import com.globant.FinalProject.controller.ProductController;
+import com.globant.FinalProject.controller.SiteController;
+import com.globant.FinalProject.controller.UserController;
+import com.globant.FinalProject.entity.Cart;
+import com.globant.FinalProject.entity.CartItem;
+import com.globant.FinalProject.entity.Category;
+import com.globant.FinalProject.entity.Product;
+import com.globant.FinalProject.entity.Purchase;
+import com.globant.FinalProject.entity.User;
+import com.globant.FinalProject.service.CartService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = App.class)
+@WebAppConfiguration
 public class CartControllerTest {
 
 	@Autowired
-	private CartController cartController; 
+	private CartController cartController;
 	@Autowired
 	private SiteController siteController;
 	@Autowired
@@ -50,64 +54,13 @@ public class CartControllerTest {
 	private CartItem cartItem;
 	private CartItem cartItem2;
 	private Purchase purchase;
-	
-	@Test
-	public void createAndDeleteCartWithoutUserLoggedInTest() {
-		/**
-		 * Creation of an empty cart without a user linked to it.
-		 */
-		cart = new Cart();
-		cart = cartController.createCart(cart);
-		assertNotNull(cart);
-		cartService.deleteCart(cartService.findByUser(null));
-		cart = cartController.showCart(null);
-		assertNull(cart);
-	}
-	@Test
-	public void createAndDeleteCartWithUserLoggedIn() {
-		assertFalse(Site.getInstance().getLoggedUsers().isEmpty());
-		assertNotNull(cart);
-		assertEquals(user.getUsername(), cart.getUser().getUsername());
-	}
 
-	@Test
-	public void addItemToCartTest() {
-		assertEquals(2, cartService.findByUser(user).getCartItem().size());
-			assertEquals(cartItem.getProduct().getId(), cartService.findByUser(user).getCartItem().get(0).getProduct().getId());
-			assertEquals(cartItem.getQuantity(), cartService.findByUser(user).getCartItem().get(0).getQuantity());
-			assertEquals(cartItem2.getProduct().getId(), cartService.findByUser(user).getCartItem().get(1).getProduct().getId());
-			assertEquals(cartItem2.getQuantity(), cartService.findByUser(user).getCartItem().get(1).getQuantity());
-		}
-
-	@Test
-	public void updateQuantityTest() {
-			cartController.updateQuantity(product1.getId(), 9000, cartService.findByUser(user));
-				assertEquals(cartItem.getProduct().getId(), cartService.findByUser(user).getCartItem().get(0).getProduct().getId());
-				assertEquals(9000, cartService.findByUser(user).getCartItem().get(0).getQuantity());
-			}
-	@Test
-	public void removeItemFromCart() {
-		cartController.removeItemFromCart(product1.getId(), cart);
-		assertNull(cartController.findProductInCart(cart, product1));
-		assertNotNull(cartController.findProductInCart(cart, product2));
-		}
-	@Test
-	public void checkoutTest() {
-		purchase = cartController.checkout(cart);
-		assertNotNull(purchase);
-		assertEquals(user.getUsername(), purchase.getUser().getUsername());
-		/**
-		 * Deletion
-		 */
-		cartService.deletePurchase(purchase);
-		
-	}
 	@Before
 	public void loadData() {
 		/**
 		 * User creation
 		 */
-	
+
 		user = new User();
 		user.setFirstName("Shizuo");
 		user.setLastName("Heiwajima");
@@ -129,16 +82,16 @@ public class CartControllerTest {
 		category.setName("Books");
 		category.setName("All kinds of printed material");
 		category = categoryController.addCategory(category);
-/**
- * Products creation
- */
+		/**
+		 * Products creation
+		 */
 		product1 = new Product();
 		product1.setName("The Bible");
 		product1.setDescription("Religious book");
 		product1.setPrice(1000);
 		product1.setCategory(category);
 		product1 = productController.addProduct(product1);
-		
+
 		product2 = new Product();
 		product2.setName("Coran");
 		product2.setDescription("Another Religious book");
@@ -160,6 +113,7 @@ public class CartControllerTest {
 		cart.getCartItem().add(cartItem2);
 		cartController.updateCart(cart);
 	}
+
 	@After
 	public void deleteData() {
 		cartController.emptyCart(user.getUsername());
@@ -169,6 +123,55 @@ public class CartControllerTest {
 		productController.deleteProduct(product1.getId());
 		productController.deleteProduct(product2.getId());
 		categoryController.deleteCategory(category.getId());
-		
+
+	}
+
+	@Test
+	public void createAndDeleteCartWithoutUserLoggedInTest() {
+		cart = new Cart();
+		cart = cartController.createCart(cart);
+		assertNotNull(cart);
+		cartService.deleteCart(cartService.findByUser(null));
+		cart = cartController.showCart(null);
+		assertNull(cart);
+	}
+
+	@Test
+	public void createAndDeleteCartWithUserLoggedIn() {
+		assertFalse(Site.getInstance().getLoggedUsers().isEmpty());
+		assertNotNull(cart);
+		assertEquals(user.getUsername(), cart.getUser().getUsername());
+	}
+
+	@Test
+	public void addItemToCartTest() {
+		assertEquals(2, cartService.findByUser(user).getCartItem().size());
+		assertEquals(cartItem.getProduct().getId(), cartService.findByUser(user).getCartItem().get(0).getProduct().getId());
+		assertEquals(cartItem.getQuantity(), cartService.findByUser(user).getCartItem().get(0).getQuantity());
+		assertEquals(cartItem2.getProduct().getId(), cartService.findByUser(user).getCartItem().get(1).getProduct().getId());
+		assertEquals(cartItem2.getQuantity(), cartService.findByUser(user).getCartItem().get(1).getQuantity());
+	}
+
+	@Test
+	public void updateQuantityTest() {
+		cartController.updateQuantity(product1.getId(), 9000, cartService.findByUser(user));
+		assertEquals(cartItem.getProduct().getId(), cartService.findByUser(user).getCartItem().get(0).getProduct().getId());
+		assertEquals(9000, cartService.findByUser(user).getCartItem().get(0).getQuantity());
+	}
+
+	@Test
+	public void removeItemFromCart() {
+		cartController.removeItemFromCart(product1.getId(), cart);
+		assertNull(cartService.findProductInCart(cart, product1));
+		assertNotNull(cartService.findProductInCart(cart, product2));
+	}
+
+	@Test
+	public void checkoutTest() {
+		purchase = cartController.checkout(cart);
+		assertNotNull(purchase);
+		assertEquals(user.getUsername(), purchase.getUser().getUsername());
+		cartService.deletePurchase(purchase);
+
 	}
 }

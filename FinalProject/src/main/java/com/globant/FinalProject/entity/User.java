@@ -1,4 +1,4 @@
-package com.globant.Topic6.entity;
+package com.globant.FinalProject.entity;
 
 import java.util.List;
 

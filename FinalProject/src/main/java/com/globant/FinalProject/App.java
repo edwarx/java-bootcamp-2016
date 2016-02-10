@@ -1,4 +1,4 @@
-package com.globant.Topic6;
+package com.globant.FinalProject;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

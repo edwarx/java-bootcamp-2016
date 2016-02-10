@@ -1,4 +1,4 @@
-package com.globant.Topic6.controller;
+package com.globant.FinalProject.controller;
 
 import java.util.List;
 
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.globant.Topic6.entity.Category;
-import com.globant.Topic6.service.CategoryService;
+import com.globant.FinalProject.entity.Category;
+import com.globant.FinalProject.service.CategoryService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -22,7 +22,7 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @Configuration
 @RequestMapping("/category")
-@ComponentScan("com.globant.Topic6.service")
+@ComponentScan("com.globant.FinalProject.service")
 @Api(value = "Category", description = "All operations related to product's categories")
 public class CategoryController {
 

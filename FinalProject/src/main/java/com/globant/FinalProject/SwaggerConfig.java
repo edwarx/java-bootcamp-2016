@@ -1,4 +1,4 @@
-package com.globant.Topic6;
+package com.globant.FinalProject;
 
 import static springfox.documentation.builders.PathSelectors.regex;
 

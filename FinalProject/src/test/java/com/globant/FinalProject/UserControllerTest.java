@@ -1,4 +1,4 @@
-package com.globant.Topic6;
+package com.globant.FinalProject;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -13,23 +13,23 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.AnnotationConfigContextLoader;
+import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.globant.Topic6.controller.UserController;
-import com.globant.Topic6.entity.Address;
-import com.globant.Topic6.entity.User;
+import com.globant.FinalProject.App;
+import com.globant.FinalProject.controller.UserController;
+import com.globant.FinalProject.entity.Address;
+import com.globant.FinalProject.entity.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = App.class)
-@ContextConfiguration(loader=AnnotationConfigContextLoader.class)
+@WebAppConfiguration
 public class UserControllerTest {
 
 	@Autowired
 	private UserController userController;
 	private User user;
-	
+
 	@Before
 	public void loadData() {
 		user = new User();
@@ -44,38 +44,31 @@ public class UserControllerTest {
 		address.setCountry("Argentina");
 		user.getAddress().add(address);
 		userController.addUser(user);
-		
 	}
+
 	@After
 	public void deleteData() {
 		userController.deleteUser(user.getUsername());
 	}
+
 	@Test
-	public void addAndDeleteUserTest()
-	{
+	public void addAndDeleteUserTest() {
 		assertNotNull(userController.findByUsername(user.getUsername()));
 	}
+
 	@Test
 	public void findByNameTest() {
-
-		/**
-		 * We look up the user in the database using the firstName and the lastName
-		 * There may be several users with the same first and last name.
-		 */
 		List<User> userResultList = userController.findByName(user.getFirstName(), user.getLastName());
 		Iterator<User> it = userResultList.iterator();
-		while (it.hasNext())
-		{
+		while (it.hasNext()) {
 			User temp = it.next();
 			assertEquals(user.getFirstName(), temp.getFirstName());
 			assertEquals(user.getLastName(), temp.getLastName());
 		}
 	}
+
 	@Test
 	public void updateUserTest() {
-		/**
-		 * We change the password...
-		 */
 		user.setPassword("NewPassword");
 		userController.updateUser(null, user);
 		assertEquals(user.getPassword(), userController.findByUsername(user.getUsername()).getPassword());

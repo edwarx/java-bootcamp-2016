@@ -1,4 +1,4 @@
-package com.globant.Topic6.controller;
+package com.globant.FinalProject.controller;
 
 import java.util.List;
 
@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.globant.Topic6.entity.User;
-import com.globant.Topic6.service.UserService;
+import com.globant.FinalProject.entity.User;
+import com.globant.FinalProject.service.UserService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -24,7 +24,7 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @Component
 @RequestMapping("/user")
-@ComponentScan("com.globant.Topic6.service")
+@ComponentScan("com.globant.FinalProject.service")
 @Api(value = "User", description = "All operations related to users")
 public class UserController {
 

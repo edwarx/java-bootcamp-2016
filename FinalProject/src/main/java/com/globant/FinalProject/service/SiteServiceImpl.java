@@ -1,13 +1,13 @@
-package com.globant.Topic6.service;
+package com.globant.FinalProject.service;
 
 import java.util.Iterator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.globant.Topic6.Site;
-import com.globant.Topic6.entity.Cart;
-import com.globant.Topic6.entity.User;
+import com.globant.FinalProject.Site;
+import com.globant.FinalProject.entity.Cart;
+import com.globant.FinalProject.entity.User;
 
 @Component
 public class SiteServiceImpl implements SiteService {
@@ -22,7 +22,6 @@ public class SiteServiceImpl implements SiteService {
 	 * associates that cart to the user. If the user had a previous cart, the
 	 * method loads it and discards the previous cart.
 	 */
-	@Override
 	public boolean login(User user) {
 		User temp = userService.findByUsername(user.getUsername());
 		if (temp.getPassword().compareTo(user.getPassword()) == 0) {
@@ -44,7 +43,6 @@ public class SiteServiceImpl implements SiteService {
 
 	}
 
-	@Override
 	public boolean logout(User user) {
 		Iterator<User> it = Site.getInstance().getLoggedUsers().iterator();
 		while (it.hasNext()) {

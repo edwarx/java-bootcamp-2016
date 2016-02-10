@@ -1,4 +1,4 @@
-package com.globant.Topic6.controller;
+package com.globant.FinalProject.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.globant.Topic6.entity.Cart;
-import com.globant.Topic6.entity.Purchase;
-import com.globant.Topic6.service.CartService;
-import com.globant.Topic6.service.ProductService;
-import com.globant.Topic6.service.UserService;
+import com.globant.FinalProject.entity.Cart;
+import com.globant.FinalProject.entity.Purchase;
+import com.globant.FinalProject.service.CartService;
+import com.globant.FinalProject.service.ProductService;
+import com.globant.FinalProject.service.UserService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -23,7 +23,7 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @Configuration
 @RequestMapping("/cart")
-@ComponentScan("com.globant.Topic6.service")
+@ComponentScan("com.globant.FinalProject.service")
 @Api(value = "Cart", description = "All operations related to a cart")
 public class CartController {
 	@Autowired

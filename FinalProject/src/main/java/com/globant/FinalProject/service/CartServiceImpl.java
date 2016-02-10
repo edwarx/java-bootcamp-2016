@@ -1,17 +1,17 @@
-package com.globant.Topic6.service;
+package com.globant.FinalProject.service;
 
 import java.util.Iterator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.globant.Topic6.entity.Cart;
-import com.globant.Topic6.entity.CartItem;
-import com.globant.Topic6.entity.Product;
-import com.globant.Topic6.entity.Purchase;
-import com.globant.Topic6.entity.User;
-import com.globant.Topic6.repository.CartRepository;
-import com.globant.Topic6.repository.PurchaseRepository;
+import com.globant.FinalProject.entity.Cart;
+import com.globant.FinalProject.entity.CartItem;
+import com.globant.FinalProject.entity.Product;
+import com.globant.FinalProject.entity.Purchase;
+import com.globant.FinalProject.entity.User;
+import com.globant.FinalProject.repository.CartRepository;
+import com.globant.FinalProject.repository.PurchaseRepository;
 
 @Component
 public class CartServiceImpl implements CartService {
@@ -22,31 +22,26 @@ public class CartServiceImpl implements CartService {
 	@Autowired
 	private PurchaseRepository purchaseRepository;
 
-	@Override
 	public Cart createCart(Cart cart) {
 		return cartRepository.save(cart);
 
 	}
 
-	@Override
 	public Cart showCart(String username) {
 		return findByUser(userService.findByUsername(username));
 
 	}
 
-	@Override
 	public void updateCart(Cart cart) {
 		cartRepository.save(cart);
 
 	}
 
-	@Override
 	public void emptyCart(Cart cart) {
 		cartRepository.delete(cart);
 
 	}
 
-	@Override
 	public void addItemToCart(Product product, int quantity, Cart cart) {
 		CartItem item = new CartItem();
 		item.setProduct(product);
@@ -57,14 +52,12 @@ public class CartServiceImpl implements CartService {
 
 	}
 
-	@Override
 	public void removeItemFromCart(Product product, Cart cart) {
 		cart.getCartItem().remove(findProductInCart(cart, product));
 		updateCart(cart);
 
 	}
 
-	@Override
 	public void updateQuantity(Product product, int quantity, Cart cart) {
 		CartItem cartItem = findProductInCart(cart, product);
 		cartItem.setQuantity(quantity);
@@ -72,7 +65,6 @@ public class CartServiceImpl implements CartService {
 
 	}
 
-	@Override
 	public CartItem findProductInCart(Cart cart, Product product) {
 		Iterator<CartItem> it = cart.getCartItem().iterator();
 		while (it.hasNext()) {
@@ -88,7 +80,6 @@ public class CartServiceImpl implements CartService {
 	 * Creates an order from the current cart, then empties the cart.
 	 */
 
-	@Override
 	public Purchase checkout(Cart cart) {
 		double total = 0;
 		Iterator<CartItem> it = cart.getCartItem().iterator();
@@ -105,12 +96,10 @@ public class CartServiceImpl implements CartService {
 
 	}
 
-	@Override
 	public Cart findByUser(User user) {
 		return cartRepository.findByUser(user);
 	}
 
-	@Override
 	public void deleteCart(Cart cart) {
 		if (cart != null) {
 			cartRepository.delete(cart);
@@ -118,13 +107,11 @@ public class CartServiceImpl implements CartService {
 
 	}
 
-	@Override
 	public void saveCart(Cart cart) {
 		cartRepository.save(cart);
 
 	}
 
-	@Override
 	public void deletePurchase(Purchase purchase) {
 		purchaseRepository.delete(purchase);
 
