@@ -24,22 +24,18 @@ public class CartServiceImpl implements CartService {
 
 	public Cart createCart(Cart cart) {
 		return cartRepository.save(cart);
-
 	}
-
+	
 	public Cart showCart(String username) {
 		return findByUser(userService.findByUsername(username));
-
 	}
 
 	public void updateCart(Cart cart) {
 		cartRepository.save(cart);
-
 	}
 
 	public void emptyCart(Cart cart) {
 		cartRepository.delete(cart);
-
 	}
 
 	public void addItemToCart(Product product, int quantity, Cart cart) {
